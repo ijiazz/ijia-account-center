@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "name": "be:start api",
+      "request": "launch",
+      "type": "node",
+      "presentation": {
+        "hidden": false,
+        "group": "deno",
+      },
+      "program": "src/main.ts",
+      "cwd": "${workspaceFolder}/be",
+      "sourceMaps": true,
+      "runtimeArgs": ["run", "--no-lock", "-c", "deno.json", "--env"],
+      "runtimeExecutable": "deno",
+    },
+  ],
+}

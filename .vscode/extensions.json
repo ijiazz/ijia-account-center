@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "denoland.vscode-deno",
+    "styled-components.vscode-styled-components",
+    "vitest.explorer",
+    "ms-playwright.playwright"
+  ]
+}

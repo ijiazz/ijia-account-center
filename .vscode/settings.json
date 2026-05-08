@@ -1,0 +1,6 @@
+{
+  "files.eol": "\n",
+  "vitest.runtime": "deno",
+  "vitest.debugExclude": ["<node_internals>/**"],
+  "editor.defaultFormatter": "denoland.vscode-deno"
+}

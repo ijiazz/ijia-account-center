@@ -1,0 +1,6 @@
+{
+  "fmt": {
+    "lineWidth": 120
+  },
+  "workspace": ["./fe", "./be"]
+}
