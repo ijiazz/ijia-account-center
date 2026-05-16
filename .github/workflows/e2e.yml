@@ -28,7 +28,7 @@ jobs:
   e2e:
     runs-on: ubuntu-22.04
     needs: build-images
-    steps:
+    steps:      
       - uses: actions/checkout@v6
       - uses: denoland/setup-deno@v2
         with:
@@ -39,6 +39,17 @@ jobs:
         run: deno install --frozen
         working-directory: ./e2e
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: account-center-be-image-${{ github.sha }}
+
+      - name: Load account-center-be image
+        run: docker load -i account-center-be.tar
+      - name: Build remaining local services
+        run: docker compose build ijiadb redis account-center-fe
+      - name: Start services
+        run: docker compose up -d
+
       - uses: actions/cache@v4 #https://playwright.dev/docs/browsers#managing-browser-binaries
         with:
           path: /home/runner/.cache/ms-playwright
@@ -47,18 +58,6 @@ jobs:
         run: deno x playwright install chromium webkit firefox --with-deps
         working-directory: ./e2e
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: account-center-be-image-${{ github.sha }}
-
-      - name: Load account-center-be image
-        run: docker load -i account-center-be.tar
-
-      - name: Build remaining local services
-        run: docker compose build ijiadb redis account-center-fe
-
-      - name: Start services
-        run: docker compose up -d
       - name: E2E test
         continue-on-error: true
         run: deno task e2e:run
