@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="IJIA学院账号中心" />
+    <meta name="keywords" content="IJIA学院,账号中心" />
+    <meta name="author" content="IJIA学院" />
+    <meta name="Robots" content="noindex" />
+    <title>账号中心-IJIA学院</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+    <style id="loadingStyle">
+      .app-loading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        top: 0;
+      }
+      .app-loading-animation {
+        background: -webkit-linear-gradient(
+          135deg,
+          #00ffcc 0%,
+          #12ffd0 10%,
+          #ff6ac6 25%,
+          #ffea00 50%,
+          #54ff41 55%,
+          #2adfff 60%,
+          #a948ff 80%,
+          #ff6384 95%,
+          #ff456d 100%
+        );
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-size: 600% 300%;
+        animation: flowCss 12s infinite linear;
+      }
+      @keyframes flowCss {
+        0% {
+          /* 移动背景位置 */
+          background-position: 0 0;
+        }
+
+        100% {
+          background-position: -300% 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script src="./src/main.tsx" type="module"></script>
+
+    <div id="app" style="height: 100%; overflow: auto"><!--SSR-ELEMENT--></div>
+    <div id="app-loading" class="app-loading" style="position: absolute">
+      <div class="app-loading-animation">
+        <h1>Loading</h1>
+      </div>
+    </div>
+    <span style="display: none">IJIA学院账号中心</span>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+name: Deploy WEB
+
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy to Cloudflare Pages
+    runs-on: ubuntu-latest
+    environment: web
+    steps:
+      - uses: actions/checkout@v6
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - run: deno install --frozen
+        working-directory: ./fe
+
+      - name: Build
+        run: deno task build
+
+      - name: preinstall wrangler
+        run: deno add npm:wrangler #cloudflare/wrangler-action@v3 不支持 deno，需要提前安装 wrangler
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./fe/dist --project-name=ijia-account-center
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

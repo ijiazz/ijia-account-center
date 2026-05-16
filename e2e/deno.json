@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "check:type": "deno check",
+    "check:fmt": "deno fmt --check",
+    "fmt": "deno fmt",
+    "e2e:local": "deno x playwright test --ui",
+    "e2e:run": "deno x playwright test -c playwright.config.ts"
+  },
+  "fmt": {
+    "lineWidth": 120
+  },
+  "nodeModulesDir": "manual",
+  "imports": {
+    "@ijia/account-dto": "jsr:@ijia/account-dto@^0.0.0",
+    "@/": "./"
+  },
+  "links": ["../dto"]
+}

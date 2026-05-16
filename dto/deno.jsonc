@@ -1,0 +1,20 @@
+{
+  "name": "@ijia/account-dto",
+  "version": "0.0.0",
+  "tasks": {
+    "check:type": "deno check",
+    "check:fmt": "deno fmt --check",
+    "fmt": "deno fmt",
+    "check:lint": "deno lint"
+  },
+  "exports": {
+    ".": "./src/mod.ts"
+  },
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "jsx": "react-jsx"
+  }
+}
