@@ -22,9 +22,11 @@ jobs:
 
       - name: Build
         run: deno task build
+        working-directory: ./fe
 
       - name: preinstall wrangler
         run: deno add npm:wrangler #cloudflare/wrangler-action@v3 不支持 deno，需要提前安装 wrangler
+        working-directory: ./fe
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
