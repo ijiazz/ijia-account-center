@@ -1,6 +1,10 @@
 {
   "tasks": {
-    "install": ""
+    "fmt": "deno fmt",
+    "check:fmt": "deno fmt --check"
+  },
+  "fmt": {
+    "lineWidth": 120
   },
   "exclude": ["**/src/**", "**/dist/**"]
 }

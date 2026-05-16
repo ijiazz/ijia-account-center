@@ -11,34 +11,32 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2
+      - name: check format
+        run: deno task check:fmt
 
       - name: check dto
         if: ${{ always() }}
         run: |
           deno install --frozen
           deno task check:type
-          deno task check:fmt
         working-directory: ./dto
       - name: check fe
         if: ${{ always() }}
         run: |
           deno install --frozen
           deno task check:type
-          deno task check:fmt
         working-directory: ./fe
       - name: check be
         if: ${{ always() }}
         run: |
           deno install --frozen
           deno task check:type
-          deno task check:fmt
         working-directory: ./be
       - name: check e2e
         if: ${{ always() }}
         run: |
           deno install --frozen
           deno task check:type
-          deno task check:fmt
         working-directory: ./e2e
   test-api:
     runs-on: ubuntu-latest
