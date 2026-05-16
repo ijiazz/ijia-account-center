@@ -1,4 +1,4 @@
-FROM denoland/deno:debian-2.7.14
+FROM denoland/deno:alpine-2.7.14
 ENV DENO_DIR=/deno-dir
 
 WORKDIR /serve/account-center-be
