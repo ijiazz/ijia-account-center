@@ -28,7 +28,7 @@ jobs:
   e2e:
     runs-on: ubuntu-22.04
     needs: build-images
-    steps:      
+    steps:
       - uses: actions/checkout@v6
       - uses: denoland/setup-deno@v2
         with:
