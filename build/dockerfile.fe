@@ -18,7 +18,6 @@ WORKDIR /build
 ADD ./dto/src ./dto/src
 
 ADD ./fe/index.html ./fe/vite.config.ts ./fe/
-ADD ./fe/build ./fe/build
 ADD ./fe/public ./fe/public
 ADD ./fe/src ./fe/src
 

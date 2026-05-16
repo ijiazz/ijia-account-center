@@ -11,6 +11,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2
+          cache: true
       - name: check format
         run: deno task check:fmt
 
@@ -66,6 +67,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2
+          cache: true
       - name: install
         run: deno install --frozen
         working-directory: ./be
