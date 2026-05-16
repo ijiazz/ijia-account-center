@@ -1,5 +1,5 @@
 FROM postgres:17-alpine
 
-ADD ./be/node_modules/@jsr/ijia__school-db/sql ./sql
+ADD ./e2e/node_modules/@ijia/school-db/sql ./sql
 RUN chmod u+x ./sql/create-merge.sh
 RUN ./sql/create-merge.sh > /docker-entrypoint-initdb.d/init.sql
