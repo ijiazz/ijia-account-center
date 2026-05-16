@@ -1,7 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createFetchSuite, FetchSuiteBase, HoFetch, InferFetchSuite } from "@asla/hofetch";
 import { ApiDefined } from "@ijia/account-dto";
-import { alert, errorHandler, versionHandler } from "./client/_middleware.ts";
+import { alert, errorHandler } from "./client/_middleware.ts";
 import { API_HOST } from "@/common/host.ts";
 
 export * from "./client/event.ts";
@@ -33,4 +33,3 @@ export const api: API = createFetchSuite<ApiDefined>(http, {
 
 http.use(errorHandler);
 http.use(alert);
-http.use(versionHandler);

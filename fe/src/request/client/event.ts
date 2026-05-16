@@ -107,10 +107,3 @@ export class MaintenanceEvent extends Event {
     super(ApiEvent.alert);
   }
 }
-
-export class VersionUpdateEvent extends Event {
-  static version: string | null;
-  constructor(readonly version: string) {
-    super(ApiEvent.versionUpdate);
-  }
-}
