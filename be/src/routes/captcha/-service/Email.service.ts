@@ -1,4 +1,4 @@
-import { APP_NAME, ENV, RunMode } from "@/config.ts";
+import { APP_NAME, ENV } from "@/config.ts";
 import { SessionManager } from "../-utils/_SessionManage.ts";
 import { EmailCaptchaQuestion, EmailCaptchaReply } from "@ijia/account-dto";
 import { getEmailSender } from "@/services/email.ts";
@@ -21,8 +21,6 @@ class EmailCaptchaService {
         html: captchaEmail.html,
         text: captchaEmail.text,
       });
-    } else if (ENV.MODE === RunMode.Dev) {
-      console.log("模拟发送邮件验证码：" + captchaEmail.code, captchaEmail);
     }
     return this.createSession(captchaEmail);
   }
