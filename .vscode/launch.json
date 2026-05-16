@@ -6,13 +6,13 @@
       "type": "node",
       "presentation": {
         "hidden": false,
-        "group": "deno",
+        "group": "deno"
       },
       "program": "src/main.ts",
       "cwd": "${workspaceFolder}/be",
       "sourceMaps": true,
-      "runtimeArgs": ["run", "--no-lock", "-c", "deno.json", "--env"],
-      "runtimeExecutable": "deno",
-    },
-  ],
+      "runtimeArgs": ["run", "--no-lock", "-c", "deno.jsonc", "--env"],
+      "runtimeExecutable": "deno"
+    }
+  ]
 }

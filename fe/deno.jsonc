@@ -1,0 +1,52 @@
+{
+  "tasks": {
+    "dev": "deno x vite",
+    "check:type": "deno check",
+    "check:fmt": "deno fmt --check",
+    "fmt": "deno fmt",
+    "check:lint": "deno lint",
+    "build": "deno x vite build"
+  },
+  "nodeModulesDir": "manual",
+  "imports": {
+    "@ant-design/icons": "npm:@ant-design/icons@^6.2.2",
+    "@asla/hofetch": "jsr:@asla/hofetch@^0.0.1",
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^2.0.2",
+    "@emotion/css": "npm:@emotion/css@^11.13.5",
+    "@sentry/react": "npm:@sentry/react@^10.52.0",
+    "@tanstack/react-query": "npm:@tanstack/react-query@^5.100.9",
+    "@tanstack/react-router": "npm:@tanstack/react-router@^1.169.2",
+    "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.167.35",
+    "antd": "npm:antd@^6.3.7",
+    "js-cookie": "npm:js-cookie@^3.0.5",
+    "react": "npm:react@^19.2.6",
+    "react-dom": "npm:react-dom@^19.2.6",
+    "react-hook-form": "npm:react-hook-form@^7.75.0",
+
+    // dev dependencies
+    "@types/js-cookie": "npm:@types/js-cookie@^3.0.6",
+    "@types/react": "npm:@types/react@^19.2.14",
+    "@types/react-dom": "npm:@types/react-dom@^19.2.3",
+    "@vitejs/plugin-legacy": "npm:@vitejs/plugin-legacy@^8.0.1",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^6.0.1",
+    "vite": "npm:vite@^8.0.11",
+    "@ijia/account-dto": "jsr:@ijia/account-dto@^0.0.0",
+    "@/": "./src/"
+  },
+  "allowScripts": {
+    "allow": ["npm:core-js@3.49.0"]
+  },
+  "fmt": {
+    "lineWidth": 120
+  },
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "jsx": "react-jsx",
+    "skipLibCheck": true
+  },
+  "links": ["../dto"],
+  "exclude": [".vite", ".tanstack", "vite.config.ts", "dist", "build"]
+}

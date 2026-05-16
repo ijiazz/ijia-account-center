@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "types": ["node"],
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+
+    "isolatedDeclarations": false,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "noImplicitOverride": true,
+    "noEmit": true,
+    "paths": {
+      "@ijia/account-dto": ["../dto/src/mod.ts"],
+      "@/*": ["./*"],
+      "@test/*": ["./tests/*"]
+    }
+  }
+}

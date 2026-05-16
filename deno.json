@@ -1,6 +1,10 @@
 {
+  "tasks": {
+    "fmt": "deno fmt",
+    "check:fmt": "deno fmt --check"
+  },
   "fmt": {
     "lineWidth": 120
   },
-  "workspace": ["./fe", "./be"]
+  "exclude": ["**/src/**", "**/dist/**"]
 }

@@ -1,0 +1,109 @@
+import { goRedirectLoginPath } from "@/common/router.tsx";
+import { getResponseErrorInfo } from "./util.ts";
+import { parseISODate } from "@/common/date.ts";
+
+export const IGNORE_ERROR_MSG = Symbol("ignore error message");
+export const IGNORE_UNAUTHORIZED_REDIRECT = Symbol("ignore unauthorized redirect");
+
+export const apiEvent = new EventTarget();
+
+export enum ApiEvent {
+  error = "error",
+  alert = "alert",
+  versionUpdate = "versionUpdate",
+}
+
+export type ApiErrorEventOption = {
+  ignoreUnauthorizedRedirect?: boolean;
+  headers: Headers;
+  status: number;
+  body?: unknown;
+};
+export class ApiErrorEvent extends Event {
+  #response: Readonly<ApiErrorEventOption>;
+  constructor(option: ApiErrorEventOption) {
+    super(ApiEvent.error);
+    this.#response = { ...option };
+  }
+  #err?: { message?: string; code?: string };
+  #getError() {
+    if (!this.#err) {
+      this.#err = getResponseErrorInfo(this.#response.body);
+    }
+    return this.#err;
+  }
+  getMessage(): string | number | undefined {
+    const err = this.#getError();
+    if (err) {
+      const { headers, status } = this.#response;
+      const isHtml = headers.get("content-type")?.startsWith("text/html");
+      if (err.message && !isHtml) return err.message;
+      else return status;
+    }
+  }
+  getRedirect(): { url?: string; isIgnore?: boolean } {
+    const isUnauthorized = this.#response.status === 401 && this.#getError()?.code === "REQUIRED_LOGIN";
+    if (isUnauthorized) {
+      if (!this.#response.ignoreUnauthorizedRedirect) {
+        return { url: goRedirectLoginPath() };
+      } else {
+        return {
+          isIgnore: true,
+        };
+      }
+    }
+    return {};
+  }
+}
+
+export class MaintenanceEvent extends Event {
+  static maintenance: string | null;
+  static parseMessage(maintenance: string | null): string | null {
+    const range = this.#parseMaintenanceRange(maintenance);
+    if (range) {
+      const { from, to } = range;
+
+      const now = Date.now();
+      if (to.getTime() > now) {
+        const toStr = this.#dateToString(to);
+        if (from && now < from.getTime()) {
+          const fromStr = this.#dateToString(from);
+          return `IJIA学院网站将在 ${fromStr} ~ ${toStr} 停机维护`;
+        } else {
+          return `IJIA学院网站维护中，预计 ${toStr} 恢复正常, 在这之前访问本站可能会出现异常`;
+        }
+      }
+    }
+    return null;
+  }
+
+  /** 返回格式 YYYY年MM月DD日HH:mm */
+  static #dateToString(date: Date): string {
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日${pad(date.getHours())}:${
+      pad(date.getMinutes())
+    }`;
+  }
+  /**
+   * range格式：两个已“/”分隔的 ISO 时间
+   */
+  static #parseMaintenanceRange(range?: string | null): { from?: Date; to: Date } | null {
+    if (!range) return null;
+    const res = range.split("/");
+    if (res.length > 2) return null;
+    const [from, to] = res;
+    const fromDate = parseISODate(from);
+    const toDate = parseISODate(to);
+
+    if (!toDate) return null;
+
+    return {
+      from: fromDate,
+      to: toDate,
+    };
+  }
+
+  constructor(readonly message: string) {
+    super(ApiEvent.alert);
+  }
+}

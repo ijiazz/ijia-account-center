@@ -1,0 +1,50 @@
+import { createFetchSuite, FetchSuiteBase, HoFetch, HoFetchStatusError, InferFetchSuite } from "@asla/hofetch";
+import { ApiDefined } from "@ijia/account-dto";
+import { env } from "@/playwright.config.ts";
+export type Api = {
+  [x: string]: FetchSuiteBase;
+} & InferFetchSuite<ApiDefined>;
+
+function createHoFetch() {
+  const API_PREFIX = "/api";
+  const http = new HoFetch({
+    bodyParser: {},
+    defaultOrigin: new URL(env.WEB_URL).origin,
+    createStatusError(hoResponse) {
+      const body = getResponseErrorInfo(hoResponse.bodyData);
+      if (body) return new HoFetchStatusError(hoResponse, hoResponse.status + ": " + (body as any).message);
+    },
+  });
+  const api: Api = createFetchSuite<ApiDefined>(http, {
+    basePath: API_PREFIX,
+  });
+  return { http, API_PREFIX, api };
+}
+const { http, API_PREFIX, api } = createHoFetch();
+
+export { api, API_PREFIX, http };
+
+export function isHttpErrorCode(err: any, code: string | number) {
+  return typeof err === "object" && err.code === code;
+}
+export function getResponseErrorInfo(body: unknown): { message?: string; code?: string } | undefined {
+  switch (typeof body) {
+    case "string":
+      return { message: body };
+    case "object": {
+      if (body === null) return;
+      return body;
+    }
+    default:
+      break;
+  }
+  return;
+}
+
+export const JWT_TOKEN_KEY = Symbol("jwt_token");
+http.use(async function (ctx, next) {
+  if (ctx[JWT_TOKEN_KEY]) {
+    ctx.headers.set("cookie", "access_token=" + ctx[JWT_TOKEN_KEY]);
+  }
+  return next();
+});

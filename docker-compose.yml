@@ -1,0 +1,51 @@
+services:
+  ijiadb:
+    image: ijia/db
+    container_name: ijia-db
+    build:
+      context: .
+      dockerfile: ./build/dockerfile.ijia-db
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust # 测试用
+      POSTGRES_DB: ijia
+      POSTGRES_USER: postgres
+      # POSTGRES_PASSWORD: xxx
+    ports:
+      - 5442:5432 # e2e测试时 需要连接
+  redis:
+    image: redis:7.4.2-alpine
+
+  account-center-be:
+    image: ijia/account-center-be
+    container_name: ijia-account-center-be
+    depends_on:
+      ijiadb:
+        condition: service_started
+      redis:
+        condition: service_started
+        restart: true
+    build:
+      context: .
+      dockerfile: ./build/dockerfile.be
+    environment:
+      DATABASE_URL: "postgresql://postgres@ijiadb:5432/ijia"
+      REDIS_CONNECT_URL: "redis://redis:6379"
+      OSS_ROOT_DIR: "/data/oss"
+      MODE: E2E
+      LISTEN: "0.0.0.0:3000"
+      JWT_KEY: 123
+    links:
+      - redis
+      - ijiadb
+  account-center-fe:
+    image: ijia/account-center-fe
+    container_name: ijia-account-center-fe
+    build:
+      context: .
+      dockerfile: ./build/dockerfile.fe
+    depends_on:
+      account-center-be:
+        condition: service_started
+    ports:
+      - "9001:443"
+      - "9002:80"
