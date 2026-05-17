@@ -1,4 +1,4 @@
-import { appConfig } from "@/config.ts";
+import { appConfig, ENV, RunMode } from "@/config.ts";
 import { REQUEST_AUTH_KEY } from "@ijia/account-dto";
 import { Context } from "hono";
 import { setCookie } from "hono/cookie";
@@ -13,7 +13,8 @@ export function setCookieAuth(ctx: Context, value: string, maxAge: number | null
   setCookie(ctx, REQUEST_AUTH_KEY, value, {
     domain: domain,
     maxAge: maxAge ?? undefined,
-    secure: false,
+    sameSite: "Lax",
+    secure: ENV.MODE === RunMode.Prod,
     httpOnly: true,
     path: "/",
   });

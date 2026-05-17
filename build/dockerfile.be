@@ -13,11 +13,10 @@ WORKDIR /serve/account-center-be/be
 
 RUN deno install --entrypoint ./src/main.ts --frozen
 
-VOLUME [ "/data/oss","/data/app" ]
-ENV APP_DATA_DIR=/data/app
-ENV OSS_ROOT_DIR=/data/oss
+EXPOSE 3000
 
-ENV DATABASE_URL="pg://ijia_mr@postgres:5432/ijia"
-EXPOSE 9000
+ENV DATABASE_URL="postgresql://ijia_web@localhost:5432/ijia"
+ENV OSS_ROOT_DIR="./store/oss"
+ENV LISTEN="0.0.0.0:3000"
 
 CMD ["deno","run","-A","--cached-only", "src/main.ts"] 
