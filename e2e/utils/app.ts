@@ -1,15 +1,4 @@
-import { Page } from "@playwright/test";
-import process from "node:process";
-import { dbPool } from "@/db/client.ts";
 import { env } from "@/playwright.config.ts";
-import { DbQueryPool } from "@asla/pg";
-
-export interface Context {
-  dbPool: DbQueryPool;
-  appPage: Page;
-  webInfo: typeof env;
-}
-if (!process.env.DATABASE_URL) dbPool.connectOption = env.DATABASE_URL;
 
 export function getAppURLFromRoute(
   route: string,

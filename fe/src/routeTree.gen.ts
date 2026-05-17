@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root.tsx'
 import { Route as FindAccountRouteImport } from './routes/find-account.tsx'
 import { Route as Video_backgroundRouteRouteImport } from './routes/_video_background/route.tsx'
 import { Route as IndexRouteImport } from './routes/index.tsx'
+import { Route as SecurityIndexRouteImport } from './routes/security/index.tsx'
 import { Route as Video_backgroundSignupRedirectRouteImport } from './routes/_video_background/signup-redirect.tsx'
 import { Route as Video_backgroundSignupRouteImport } from './routes/_video_background/signup.tsx'
 import { Route as Video_backgroundLoginRouteImport } from './routes/_video_background/login.tsx'
@@ -32,6 +33,13 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityIndexRoute = SecurityIndexRouteImport.update({
+  id: '/security/',
+  path: '/security/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/security/index.lazy.tsx').then((d) => d.Route),
+)
 const Video_backgroundSignupRedirectRoute =
   Video_backgroundSignupRedirectRouteImport.update({
     id: '/signup-redirect',
@@ -57,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof Video_backgroundLoginRoute
   '/signup': typeof Video_backgroundSignupRoute
   '/signup-redirect': typeof Video_backgroundSignupRedirectRoute
+  '/security/': typeof SecurityIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -64,6 +73,7 @@ export interface FileRoutesByTo {
   '/login': typeof Video_backgroundLoginRoute
   '/signup': typeof Video_backgroundSignupRoute
   '/signup-redirect': typeof Video_backgroundSignupRedirectRoute
+  '/security': typeof SecurityIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -73,12 +83,25 @@ export interface FileRoutesById {
   '/_video_background/login': typeof Video_backgroundLoginRoute
   '/_video_background/signup': typeof Video_backgroundSignupRoute
   '/_video_background/signup-redirect': typeof Video_backgroundSignupRedirectRoute
+  '/security/': typeof SecurityIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/find-account' | '/login' | '/signup' | '/signup-redirect'
+  fullPaths:
+    | '/'
+    | '/find-account'
+    | '/login'
+    | '/signup'
+    | '/signup-redirect'
+    | '/security/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/find-account' | '/login' | '/signup' | '/signup-redirect'
+  to:
+    | '/'
+    | '/find-account'
+    | '/login'
+    | '/signup'
+    | '/signup-redirect'
+    | '/security'
   id:
     | '__root__'
     | '/'
@@ -87,12 +110,14 @@ export interface FileRouteTypes {
     | '/_video_background/login'
     | '/_video_background/signup'
     | '/_video_background/signup-redirect'
+    | '/security/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   Video_backgroundRouteRoute: typeof Video_backgroundRouteRouteWithChildren
   FindAccountRoute: typeof FindAccountRoute
+  SecurityIndexRoute: typeof SecurityIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security/': {
+      id: '/security/'
+      path: '/security'
+      fullPath: '/security/'
+      preLoaderRoute: typeof SecurityIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_video_background/signup-redirect': {
@@ -163,6 +195,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   Video_backgroundRouteRoute: Video_backgroundRouteRouteWithChildren,
   FindAccountRoute: FindAccountRoute,
+  SecurityIndexRoute: SecurityIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

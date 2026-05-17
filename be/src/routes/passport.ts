@@ -9,3 +9,4 @@ export * from "./passport/signup/.post.ts";
 export * from "./passport/login.post.ts";
 export * from "./passport/reset_password.post.ts";
 export * from "./passport/logout.post.ts";
+export * from "./passport/account.get.ts";
