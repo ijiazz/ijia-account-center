@@ -6,7 +6,10 @@ export const Route = createFileRoute("/logout")({
     try {
       await api["/passport/logout"].post();
     } catch (e) {
-      globalThis.history.back();
+      if (globalThis.history.length > 1) {
+        globalThis.history.back();
+        throw redirect({ to: "/login" });
+      }
       return;
     }
     throw redirect({ to: "/login" });
