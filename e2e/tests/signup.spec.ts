@@ -1,12 +1,8 @@
-import { getAppURLFromRoute } from "@/fixtures/test.ts";
-
-import { dbPool } from "@/db/client.ts";
-import { select } from "@asla/yoursql";
-import { v } from "@/db/utils.ts";
+import { getAppURLFromRoute } from "@/utils/app.ts";
 import { FORM_BEFORE_COMMIT_WAIT_TIME, REDIRECT_WAIT_TIME } from "@/utils/browser.ts";
 import { expect, test } from "@playwright/test";
-import { getUniqueEmail } from "@/utils/user.ts";
-import { SIGNUP_REDIRECT_URL } from "@/tests/_utils/login_home.ts";
+import { getUniqueEmail, loginGetToken } from "@/utils/user.ts";
+import { SIGNUP_REDIRECT_URL } from "@/tests/_utils/login.ts";
 
 test("注册账号", async function ({ page }) {
   const email = await getUniqueEmail();
@@ -44,12 +40,5 @@ test("注册账号", async function ({ page }) {
   await page.waitForTimeout(REDIRECT_WAIT_TIME);
   await expect(page, "注册成功后导航到首页").toHaveURL(getAppURLFromRoute(SIGNUP_REDIRECT_URL), {});
 
-  await expect(
-    dbPool.queryCount(
-      select("*")
-        .from("public.user")
-        .where(`email=` + v(email)),
-    ),
-    "注册成功",
-  ).resolves.toBe(1);
+  await loginGetToken(email, "123");
 });

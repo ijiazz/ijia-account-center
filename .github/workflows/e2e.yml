@@ -9,7 +9,7 @@ on:
       - main
 jobs:
   build-images:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/upload-artifact@v7
         with:
-          name: account-center-be-image-${{ github.sha }}
+          name: account-center-be-image
           path: account-center-be.tar
           overwrite: true
 
@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: account-center-be-image-${{ github.sha }}
+          name: account-center-be-image
 
       - name: Load account-center-be image
         run: docker load -i account-center-be.tar

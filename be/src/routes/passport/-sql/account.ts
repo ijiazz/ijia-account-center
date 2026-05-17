@@ -3,6 +3,7 @@ import { HttpError } from "@/common/errors.ts";
 import { hashPasswordBackEnd } from "../-services/password.ts";
 import { select, update } from "@asla/yoursql";
 import { v } from "@/sql/utils.ts";
+import { AccountInfo } from "@ijia/account-dto";
 
 export async function changeAccountPassword(uid: number, oldPwd: string, newPwd: string) {
   const salt = crypto.randomUUID().replaceAll("-", ""); //16byte
@@ -60,6 +61,23 @@ export async function changeAccountEmail(userId: number, newEmail: string) {
     throw new HttpError(409, { message: "账号不存在" });
   }
 }
+
+/** 这是公开的，每个用户都能获取 */
+export async function getUserInfo(userId: number): Promise<AccountInfo | null> {
+  const users = await dbPool.queryRows(
+    select<AccountInfo>({
+      user_id: "id::TEXT",
+      email: true,
+      avatar_url: "'/file/avatar/'||avatar",
+      nickname: "COALESCE(nickname, id::TEXT)",
+    })
+      .from("public.user", { as: "u" })
+      .where(`u.id=${v(userId)}`)
+      .limit(1),
+  );
+  return users[0] ?? null;
+}
+
 async function expectPasswordIsEqual(user: LoginUserInfo, inputPassword: string): Promise<void> {
   if (user.pwd_salt && user.password) {
     inputPassword = await hashPasswordBackEnd(inputPassword, user.pwd_salt);

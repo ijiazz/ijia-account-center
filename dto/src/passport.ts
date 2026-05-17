@@ -1,9 +1,11 @@
 export * from "./passport/dto.ts";
+export * from "./passport/account.ts";
 
 import type {
   AccountAuthenticateToken,
   ChangeEmailParam,
   GetAccountAuthTokenParam,
+  AccountInfo,
 } from "./passport/account.ts";
 import type {
   ChangePasswordParam,
@@ -56,5 +58,11 @@ export interface PassportApi {
   "POST /passport/change_email": {
     response: null;
     body: ChangeEmailParam;
+  };
+}
+export interface PassportApi {
+  /** 获取简单用户信息 */
+  "GET /passport/account": {
+    response: AccountInfo;
   };
 }

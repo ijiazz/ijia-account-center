@@ -14,15 +14,7 @@ export function getResponseErrorInfo(body: unknown): { message?: string; code?: 
 export function isHttpErrorCode(err: any, code: string | number) {
   return typeof err === "object" && err.code === code;
 }
-/** @deprecated 改用 fileURIToURL */
-export function toFileUrl(path?: undefined | null): undefined;
-export function toFileUrl(path: string): string;
-export function toFileUrl(path?: string | null): string | undefined;
-export function toFileUrl(path?: string | null): string | undefined {
-  if (!path) return;
-  if (path.startsWith("/")) path = path.slice(1);
-  return `${location.origin}/${path}`;
-}
+
 export function fileURIToURL(uri?: undefined | null): undefined;
 export function fileURIToURL(uri: string): string;
 export function fileURIToURL(uri?: string | null): string | undefined;

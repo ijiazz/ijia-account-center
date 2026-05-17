@@ -1,8 +1,7 @@
-import { getAppURLFromRoute } from "@/fixtures/test.ts";
+import { getAppURLFromRoute } from "@/utils/app.ts";
 
 import { initAlice } from "@/utils/user.ts";
-import { loginByEmail, loginByPassword } from "@/tests/_utils/login.ts";
-import { LOGIN_REDIRECT_URL } from "./_utils/login_home.ts";
+import { LOGIN_REDIRECT_URL, loginByEmail, loginByPassword } from "@/tests/_utils/login.ts";
 import { expect, test } from "@playwright/test";
 
 test("学号加密码登录", async function ({ page }) {

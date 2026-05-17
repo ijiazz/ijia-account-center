@@ -28,3 +28,5 @@ export async function loginByEmail(page: Page, email: string) {
   await page.getByRole("checkbox", { name: "我已在抖音关注 佳佳子_zZ" }).check();
   await page.getByRole("button", { name: "登 录" }).click();
 }
+export const LOGIN_REDIRECT_URL = "/";
+export const SIGNUP_REDIRECT_URL = "/signup-redirect";
