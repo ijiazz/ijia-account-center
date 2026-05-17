@@ -1,16 +1,16 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@jsr/asla__hofetch@^0.0.1": "0.0.1",
+    "npm:@jsr/asla__hofetch@^0.0.2": "0.0.2",
     "npm:@jsr/asla__pg@~0.2.4": "0.2.4",
     "npm:@jsr/asla__yoursql@~0.13.1": "0.13.1",
     "npm:@jsr/ijia__school-db@^0.0.1": "0.0.1",
     "npm:@playwright/test@^1.55.0": "1.60.0"
   },
   "npm": {
-    "@jsr/asla__hofetch@0.0.1": {
-      "integrity": "sha512-UO90cqDucrg3M3Fxea1Jrw15DLP2N+3pQAbAyNolnL6jx2ANEDhb1NGrTFMfZ5xVUQcB01KhhqpaKW2eE3FTYw==",
-      "tarball": "https://npm.jsr.io/~/11/@jsr/asla__hofetch/0.0.1.tgz"
+    "@jsr/asla__hofetch@0.0.2": {
+      "integrity": "sha512-yRoxwEcywT1A0tYB5JiSWqc4Y1c5EsIZoiDMS6fy8HsobQOegN+OmRuHAcXmFSvRF1aF5VKr74xpkk2O3CLIOA==",
+      "tarball": "https://npm.jsr.io/~/11/@jsr/asla__hofetch/0.0.2.tgz"
     },
     "@jsr/asla__pg@0.2.4": {
       "integrity": "sha512-cIh9yGe99KN63YX33ltZ0Xpg2I2RGMRtGt3QcqZbhT0q22n9CrL/XE83XxPqDm8r0mp9wcDCyCEJazjULkQNgg==",
@@ -192,7 +192,7 @@
     ],
     "packageJson": {
       "dependencies": [
-        "npm:@jsr/asla__hofetch@^0.0.1",
+        "npm:@jsr/asla__hofetch@^0.0.2",
         "npm:@jsr/asla__pg@~0.2.4",
         "npm:@jsr/asla__yoursql@~0.13.1",
         "npm:@jsr/ijia__school-db@^0.0.1",

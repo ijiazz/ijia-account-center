@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@asla/hofetch@^0.0.1": "0.0.1",
+    "jsr:@asla/hofetch@^0.0.2": "0.0.2",
     "npm:@ant-design/icons@^6.2.2": "6.2.2_react@19.2.6_react-dom@19.2.6__react@19.2.6",
     "npm:@deno/vite-plugin@^2.0.2": "2.0.2_vite@8.0.11__terser@5.47.1_terser@5.47.1",
     "npm:@emotion/css@^11.13.5": "11.13.5",
@@ -22,8 +22,8 @@
     "npm:vite@^8.0.11": "8.0.11_terser@5.47.1"
   },
   "jsr": {
-    "@asla/hofetch@0.0.1": {
-      "integrity": "1900e6d0837a46f74bcc3256393eef7fc395f0d537826c2d7027fbedf87dd8aa"
+    "@asla/hofetch@0.0.2": {
+      "integrity": "c123918de23e4e5ca65afad6de799f38d5bee810735ac7701ae81e166154c504"
     }
   },
   "npm": {
@@ -2856,7 +2856,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@asla/hofetch@^0.0.1",
+      "jsr:@asla/hofetch@^0.0.2",
       "jsr:@ijia/account-dto@^0.0.0",
       "npm:@ant-design/icons@^6.2.2",
       "npm:@deno/vite-plugin@^2.0.2",

@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@asla/hofetch@^0.0.1": "0.0.1",
+    "jsr:@asla/hofetch@^0.0.2": "0.0.2",
     "jsr:@asla/wokao@^0.0.3": "0.0.3",
     "jsr:@asn/evlib@^3.1.3": "3.1.3",
     "jsr:@hono/hono@^4.12.18": "4.12.18",
@@ -19,8 +19,8 @@
     "npm:vitest@^4.1.6": "4.1.6_vite@8.0.13"
   },
   "jsr": {
-    "@asla/hofetch@0.0.1": {
-      "integrity": "1900e6d0837a46f74bcc3256393eef7fc395f0d537826c2d7027fbedf87dd8aa"
+    "@asla/hofetch@0.0.2": {
+      "integrity": "c123918de23e4e5ca65afad6de799f38d5bee810735ac7701ae81e166154c504"
     },
     "@asla/wokao@0.0.3": {
       "integrity": "3c8358c066ff003a688b1e552a5cfe0dafb65dc5c88df49c02c0f8b24ab4037e"
@@ -761,7 +761,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@asla/hofetch@^0.0.1",
+      "jsr:@asla/hofetch@^0.0.2",
       "jsr:@asla/wokao@^0.0.3",
       "jsr:@asn/evlib@^3.1.3",
       "jsr:@hono/hono@^4.12.18",

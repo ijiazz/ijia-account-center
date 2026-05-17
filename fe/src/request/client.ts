@@ -25,14 +25,11 @@ type API = {
   [x: string]: FetchSuiteBase;
 } & InferFetchSuite<ApiDefined>;
 
-export const http = new HoFetch({});
+export const http = new HoFetch({ fetch: (url, option) => fetch(url, { ...option, credentials: "include" }) });
 export const api: API = createFetchSuite<ApiDefined>(http, {
   basePath: API_HOST.pathname,
   origin: API_HOST.origin,
 });
-http.use((ctx, next) => {
-  ctx.credentials = "include";
-  return next();
-});
+
 http.use(errorHandler);
 http.use(alert);

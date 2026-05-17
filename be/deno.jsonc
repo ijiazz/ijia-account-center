@@ -7,7 +7,7 @@
   },
   "nodeModulesDir": "manual",
   "imports": {
-    "@asla/hofetch": "jsr:@asla/hofetch@^0.0.1",
+    "@asla/hofetch": "jsr:@asla/hofetch@^0.0.2",
     "@asla/wokao": "jsr:@asla/wokao@^0.0.3",
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^2.0.2",
     "@std/media-types": "jsr:@std/media-types@^1.1.0",
