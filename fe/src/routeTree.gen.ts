@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root.tsx'
+import { Route as LogoutRouteImport } from './routes/logout.tsx'
 import { Route as FindAccountRouteImport } from './routes/find-account.tsx'
 import { Route as Video_backgroundRouteRouteImport } from './routes/_video_background/route.tsx'
 import { Route as IndexRouteImport } from './routes/index.tsx'
@@ -17,6 +18,11 @@ import { Route as Video_backgroundSignupRedirectRouteImport } from './routes/_vi
 import { Route as Video_backgroundSignupRouteImport } from './routes/_video_background/signup.tsx'
 import { Route as Video_backgroundLoginRouteImport } from './routes/_video_background/login.tsx'
 
+const LogoutRoute = LogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FindAccountRoute = FindAccountRouteImport.update({
   id: '/find-account',
   path: '/find-account',
@@ -62,6 +68,7 @@ const Video_backgroundLoginRoute = Video_backgroundLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/find-account': typeof FindAccountRoute
+  '/logout': typeof LogoutRoute
   '/login': typeof Video_backgroundLoginRoute
   '/signup': typeof Video_backgroundSignupRoute
   '/signup-redirect': typeof Video_backgroundSignupRedirectRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/find-account': typeof FindAccountRoute
+  '/logout': typeof LogoutRoute
   '/login': typeof Video_backgroundLoginRoute
   '/signup': typeof Video_backgroundSignupRoute
   '/signup-redirect': typeof Video_backgroundSignupRedirectRoute
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_video_background': typeof Video_backgroundRouteRouteWithChildren
   '/find-account': typeof FindAccountRoute
+  '/logout': typeof LogoutRoute
   '/_video_background/login': typeof Video_backgroundLoginRoute
   '/_video_background/signup': typeof Video_backgroundSignupRoute
   '/_video_background/signup-redirect': typeof Video_backgroundSignupRedirectRoute
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/find-account'
+    | '/logout'
     | '/login'
     | '/signup'
     | '/signup-redirect'
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/find-account'
+    | '/logout'
     | '/login'
     | '/signup'
     | '/signup-redirect'
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_video_background'
     | '/find-account'
+    | '/logout'
     | '/_video_background/login'
     | '/_video_background/signup'
     | '/_video_background/signup-redirect'
@@ -117,11 +129,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   Video_backgroundRouteRoute: typeof Video_backgroundRouteRouteWithChildren
   FindAccountRoute: typeof FindAccountRoute
+  LogoutRoute: typeof LogoutRoute
   SecurityIndexRoute: typeof SecurityIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/logout': {
+      id: '/logout'
+      path: '/logout'
+      fullPath: '/logout'
+      preLoaderRoute: typeof LogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/find-account': {
       id: '/find-account'
       path: '/find-account'
@@ -195,6 +215,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   Video_backgroundRouteRoute: Video_backgroundRouteRouteWithChildren,
   FindAccountRoute: FindAccountRoute,
+  LogoutRoute: LogoutRoute,
   SecurityIndexRoute: SecurityIndexRoute,
 }
 export const routeTree = rootRouteImport
