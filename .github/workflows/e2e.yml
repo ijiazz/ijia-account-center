@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: account-center-be-image-${{ github.sha }}
+          name: account-center-be-image
 
       - name: Load account-center-be image
         run: docker load -i account-center-be.tar
