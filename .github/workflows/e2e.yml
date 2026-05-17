@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/upload-artifact@v7
         with:
-          name: account-center-be-image-${{ github.sha }}
+          name: account-center-be-image
           path: account-center-be.tar
           overwrite: true
 
