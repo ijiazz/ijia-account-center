@@ -13,7 +13,7 @@ export function setCookieAuth(ctx: Context, value: string, maxAge: number | null
   setCookie(ctx, REQUEST_AUTH_KEY, value, {
     domain: domain,
     maxAge: maxAge ?? undefined,
-    sameSite: "Lax",
+    sameSite: undefined, // 先不设置 LAX, 设置 LAX 会导致小米浏览器无法正确设置 cookie
     secure: ENV.MODE === RunMode.Prod,
     httpOnly: true,
     path: "/",
