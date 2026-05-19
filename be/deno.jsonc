@@ -3,7 +3,8 @@
     "check:type": "deno check",
     "check:fmt": "deno fmt --check",
     "fmt": "deno fmt",
-    "test": "deno x vitest run"
+    "test": "deno x vitest run",
+    "start": "deno run -A src/main.ts"
   },
   "nodeModulesDir": "manual",
   "imports": {
