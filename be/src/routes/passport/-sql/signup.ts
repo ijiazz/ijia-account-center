@@ -1,6 +1,6 @@
 import { HttpError } from "@/common/errors.ts";
 import { hashPasswordBackEnd } from "../-services/password.ts";
-import { createUser as getCreateUserSql } from "@ijia/data/query";
+import { createUser as getCreateUserSql } from "@ijia/school-db/query";
 import { initEmail } from "@/common/check.ts";
 
 export async function createUser(email: string, userInfo: { password?: string; nickname?: string }): Promise<number> {

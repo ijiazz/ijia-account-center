@@ -2,7 +2,7 @@ import { ImageCaptchaQuestion, ImageCaptchaReply } from "@ijia/account-dto";
 import { dbPool } from "@/db/client.ts";
 import { HTTPException } from "hono/http-exception";
 import { SessionManager } from "../-utils/_SessionManage.ts";
-import { getBucket, getOSS } from "@ijia/data/oss";
+import { getBucket, getOSS } from "@ijia/school-db/oss";
 import { contentType } from "@std/media-types";
 import path from "node:path";
 import { ENV, RunMode } from "@/config.ts";

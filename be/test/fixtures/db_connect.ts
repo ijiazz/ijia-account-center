@@ -1,6 +1,6 @@
 import { afterAll, test as viTest } from "vitest";
 import { dbPool } from "@/db/client.ts";
-import { createInitIjiaDb } from "@ijia/data/testlib";
+import { createInitIjiaDb } from "@ijia/school-db/testlib";
 import process from "node:process";
 import { DbManage, PgDbQueryPool } from "@asla/pg";
 import { DB_CONNECT_INFO, PUBLIC_CONNECT_INFO } from "#test/utils/db.ts";

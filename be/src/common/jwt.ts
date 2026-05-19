@@ -8,9 +8,10 @@ import {
   AuthTokenType,
   checkIjiaTokenData,
   SignAccessTokenOption,
-} from "@ijia/data/auth";
+} from "@ijia/school-db/auth";
 
-export type { AccessToken, AccessUserData, AuthTokenType, SignAccessTokenOption, SignInfo } from "@ijia/data/auth";
+export { AuthTokenType } from "@ijia/school-db/auth";
+export type { AccessToken, AccessUserData, SignAccessTokenOption, SignInfo } from "@ijia/school-db/auth";
 
 const authToken = new AuthToken<AccessJwtPayload>({
   parseSysJWT,
@@ -19,17 +20,10 @@ const authToken = new AuthToken<AccessJwtPayload>({
 });
 
 export async function signAccessToken(
-  userId: number,
-  option?: SignAccessTokenOption,
-): Promise<AccessToken<AccessUserData>>;
-export async function signAccessToken(
-  data: AccessUserData | number,
+  data: AccessUserData,
   option: SignAccessTokenOption = {},
 ): Promise<AccessToken<AccessUserData>> {
-  return authToken.signAccessToken(
-    typeof data === "number" ? { userId: data, type: AuthTokenType.User } : data,
-    option,
-  );
+  return authToken.signAccessToken(data, option);
 }
 
 export async function verifyAccessToken(accessToken: string): Promise<AccessToken<AccessUserData>> {
@@ -48,8 +42,3 @@ export function signSysJWT(data: Record<string, any>) {
 export async function parseSysJWT(accessToken: string): Promise<unknown> {
   return jwtLib.verify(accessToken, JWT_KEY, "HS256");
 }
-export const INTERNAL_MESSAGE_TOKEN = await authToken
-  .signAccessToken({ type: AuthTokenType.InternalMessage })
-  .then((accessToken) => {
-    return accessToken.token;
-  });

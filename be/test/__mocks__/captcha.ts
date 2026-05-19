@@ -1,7 +1,7 @@
 import { ImageCaptchaReply } from "@ijia/account-dto";
 import { createImageCaptchaSession, imageCaptchaService } from "@/routes/captcha.ts";
 import { insertIntoValues } from "@/sql/utils.ts";
-import { DbCaptchaPictureCreate } from "@ijia/data/db";
+import { DbCaptchaPictureCreate } from "@ijia/school-db/db";
 import { dbPool } from "@/db/client.ts";
 
 export function createCaptcha(max: number): DbCaptchaPictureCreate[] {
