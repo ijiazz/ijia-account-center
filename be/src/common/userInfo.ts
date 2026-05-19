@@ -11,7 +11,7 @@ export function createUserInfo(accessToken?: string): UserInfo {
     createError: ({ code, message }) => {
       switch (code) {
         case ERRORS.AccountFrozen:
-          return new HttpError(403, message);
+          return new HttpError(423, message);
         case ERRORS.AccountNotExist:
           return new HttpError(404, message);
 

@@ -4,7 +4,7 @@
     "npm:@jsr/asla__hofetch@^0.0.2": "0.0.2",
     "npm:@jsr/asla__pg@~0.2.4": "0.2.4",
     "npm:@jsr/asla__yoursql@~0.13.1": "0.13.1",
-    "npm:@jsr/ijia__school-db@^0.0.2": "0.0.2",
+    "npm:@jsr/ijia__school-db@^0.0.3": "0.0.3",
     "npm:@playwright/test@^1.55.0": "1.60.0"
   },
   "npm": {
@@ -30,13 +30,13 @@
       "integrity": "sha512-0ZmJ3gZQCNG1/2ULU1rpIaSMDlIZrON0UTdYTV6hRVqfg/E1wU7dHTdHsg/M5cSVwCGOMbEksNHoDR4VSJ6Vrg==",
       "tarball": "https://npm.jsr.io/~/11/@jsr/asla__yoursql/0.14.0.tgz"
     },
-    "@jsr/ijia__school-db@0.0.2": {
-      "integrity": "sha512-iqCzAwsUj9ej2s62zKi0/W+IN54/HdgUrlhMbXqjR7nMvqjY8rmJzPaCSuF27GMoowmnzjw/bZmIfJZ1dTXkUA==",
+    "@jsr/ijia__school-db@0.0.3": {
+      "integrity": "sha512-0qsZiTCnaRelgJ6fD3Z+pPm8rKAb4v0p8sWbTatw29Sf6wLAT2+JoAe1THVEcec16BXcJXZHAAzy4jh4pQHFkw==",
       "dependencies": [
         "@jsr/asla__pg",
         "@jsr/asla__yoursql@0.14.0"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/ijia__school-db/0.0.2.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/ijia__school-db/0.0.3.tgz"
     },
     "@playwright/test@1.60.0": {
       "integrity": "sha512-O71yZIbAh/PxDMNGns37GHBIfrVkEVyn+AXyIa5dOTfb4/xNvRWV+Vv/NMbNCtODB/pO7vLlF2OTmMVLhmr7Ag==",
@@ -65,7 +65,7 @@
       "integrity": "sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==",
       "dependencies": [
         "@types/node",
-        "pg-protocol@1.13.0",
+        "pg-protocol",
         "pg-types"
       ],
       "tarball": "https://registry.npmmirror.com/@types/pg/-/pg-8.20.0.tgz"
@@ -102,10 +102,6 @@
       ],
       "tarball": "https://registry.npmmirror.com/pg-pool/-/pg-pool-3.14.0.tgz"
     },
-    "pg-protocol@1.13.0": {
-      "integrity": "sha512-zzdvXfS6v89r6v7OcFCHfHlyG/wvry1ALxZo4LqgUoy7W9xhBDMaqOuMiF3qEV45VqsN6rdlcehHrfDtlCPc8w==",
-      "tarball": "https://registry.npmmirror.com/pg-protocol/-/pg-protocol-1.13.0.tgz"
-    },
     "pg-protocol@1.14.0": {
       "integrity": "sha512-n5taZ1kO3s9ngDTVxsEznOqCyToTgz0FLuPq0B33COy5pPpuWJpY3/2oRBVETuOgzdqRXfWpM9HIhp2LBBT1BA==",
       "tarball": "https://registry.npmmirror.com/pg-protocol/-/pg-protocol-1.14.0.tgz"
@@ -126,7 +122,7 @@
       "dependencies": [
         "pg-connection-string",
         "pg-pool",
-        "pg-protocol@1.14.0",
+        "pg-protocol",
         "pg-types",
         "pgpass"
       ],
@@ -199,7 +195,7 @@
         "npm:@jsr/asla__hofetch@^0.0.2",
         "npm:@jsr/asla__pg@~0.2.4",
         "npm:@jsr/asla__yoursql@~0.13.1",
-        "npm:@jsr/ijia__school-db@^0.0.2",
+        "npm:@jsr/ijia__school-db@^0.0.3",
         "npm:@playwright/test@^1.55.0"
       ]
     },
