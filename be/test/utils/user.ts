@@ -1,6 +1,6 @@
-import { Role } from "@/middleware/auth.ts";
-import { signAccessToken } from "@/common/jwt.ts";
-import { getUniqueIdFormDb, newTestUser } from "@ijia/data/testlib";
+import { AuthTokenType, signAccessToken } from "@/common/jwt.ts";
+import { getUniqueIdFormDb, newTestUser } from "@ijia/school-db/testlib";
+import { Role } from "@/common/userInfo.ts";
 
 /** 获取唯一名称 */
 export async function getUniqueName(base: string) {
@@ -15,7 +15,9 @@ export const getUniqueEmail = async (base: string) => {
 
 export async function prepareUniqueUser(nickname: string, option: PrepareUserOption = {}): Promise<UserToken> {
   const info = await newTestUser(nickname, option);
-  const { token } = await signAccessToken(info.id, { survivalSeconds: 60 * 100 * 60 });
+  const { token } = await signAccessToken({ type: AuthTokenType.User, userId: info.id }, {
+    survivalSeconds: 60 * 100 * 60,
+  });
   return {
     ...info,
     token,
