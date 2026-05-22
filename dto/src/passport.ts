@@ -27,6 +27,8 @@ export interface PassportApi {
     response: UserLoginResult;
     body: UserLoginParam;
   };
+  /** 刷新 token */
+  "POST /passport/refresh_token": {};
   /** 退出登录 */
   "POST /passport/logout": {};
   /** 注册用户 */

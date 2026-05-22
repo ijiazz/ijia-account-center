@@ -3,6 +3,7 @@ import { createFetchSuite, FetchSuiteBase, HoFetch, InferFetchSuite } from "@asl
 import { ApiDefined } from "@ijia/account-dto";
 import { alert, errorHandler } from "./client/_middleware.ts";
 import { API_HOST } from "@/common/host.ts";
+import { authRefresh } from "@/request/client/auth_refresh.ts";
 
 export * from "./client/event.ts";
 export * from "./client/util.ts";
@@ -30,6 +31,6 @@ export const api: API = createFetchSuite<ApiDefined>(http, {
   basePath: API_HOST.pathname,
   origin: API_HOST.origin,
 });
-
+http.use(authRefresh);
 http.use(errorHandler);
 http.use(alert);

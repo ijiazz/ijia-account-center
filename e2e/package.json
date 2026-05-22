@@ -3,7 +3,7 @@
     "@asla/hofetch": "jsr:@asla/hofetch@^0.0.2",
     "@asla/pg": "jsr:@asla/pg@^0.2.4",
     "@asla/yoursql": "jsr:@asla/yoursql@^0.13.1",
-    "@ijia/school-db": "jsr:@ijia/school-db@^0.0.3",
+    "@ijia/school-db": "jsr:@ijia/school-db@^0.0.4",
     "@playwright/test": "^1.55.0"
   }
 }
