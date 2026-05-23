@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { RouteApplyOption } from "@/lib/route.ts";
-import { errorHandler } from "./_error_handler.ts";
+import { errorHandler } from "@/middleware/error_handler.ts";
 import { cors } from "hono/cors";
 
 import { captchaRoutes, passportRoutes } from "@/routes/mod.ts";

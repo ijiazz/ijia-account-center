@@ -20,7 +20,7 @@
     "hono": "jsr:@hono/hono@^4.12.18",
     "@asla/pg": "npm:@jsr/asla__pg@^0.2.4",
     "@asla/yoursql": "npm:@jsr/asla__yoursql@0.14.0",
-    "@ijia/school-db": "npm:@jsr/ijia__school-db@^0.0.3",
+    "@ijia/school-db": "npm:@jsr/ijia__school-db@^0.0.4",
     "nodemailer": "npm:nodemailer@^8.0.7",
 
     "@ijia/account-dto": "jsr:@ijia/account-dto@^0.0.0",

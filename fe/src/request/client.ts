@@ -1,8 +1,10 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createFetchSuite, FetchSuiteBase, HoFetch, InferFetchSuite } from "@asla/hofetch";
 import { ApiDefined } from "@ijia/account-dto";
-import { alert, errorHandler } from "./client/_middleware.ts";
 import { API_HOST } from "@/common/host.ts";
+import { authRefresh } from "./client//middleware/auth_refresh.ts";
+import { errorHandler } from "./client/middleware/errorHandler.ts";
+import { alert } from "./client/middleware/alert.ts";
 
 export * from "./client/event.ts";
 export * from "./client/util.ts";
@@ -30,6 +32,6 @@ export const api: API = createFetchSuite<ApiDefined>(http, {
   basePath: API_HOST.pathname,
   origin: API_HOST.origin,
 });
-
+http.use(authRefresh);
 http.use(errorHandler);
 http.use(alert);

@@ -1,5 +1,5 @@
 import { HoContext, HoResponse } from "@asla/hofetch";
-import { ApiErrorEvent, apiEvent, IGNORE_ERROR_MSG, IGNORE_UNAUTHORIZED_REDIRECT, MaintenanceEvent } from "./event.ts";
+import { ApiErrorEvent, apiEvent, IGNORE_ERROR_MSG, IGNORE_UNAUTHORIZED_REDIRECT } from "../event.ts";
 
 export async function errorHandler(ctx: HoContext, next: () => Promise<HoResponse>) {
   if (ctx.allowFailed === true || ctx[IGNORE_ERROR_MSG]) return next();
@@ -21,20 +21,6 @@ export async function errorHandler(ctx: HoContext, next: () => Promise<HoRespons
       window.location.assign(redirect);
       console.info("全局 http 拦截器重定向到登录页：", redirect, `原因： ${ctx.url}`);
     }
-  }
-
-  return res;
-}
-
-export async function alert(ctx: HoContext, next: () => Promise<HoResponse>): Promise<HoResponse> {
-  const res = await next();
-
-  /** 格式 ISO/ISO */
-  const maintenance = res.headers.get("x-service-maintenance");
-  MaintenanceEvent.maintenance = maintenance;
-  const message = MaintenanceEvent.parseMessage(maintenance);
-  if (message) {
-    apiEvent.dispatchEvent(new MaintenanceEvent(message));
   }
 
   return res;
