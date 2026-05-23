@@ -1,5 +1,5 @@
 import { beforeEach, expect } from "vitest";
-import { Context, test } from "#test/fixtures/hono.ts";
+import { Context, JWT_TOKEN_KEY, test } from "#test/fixtures/hono.ts";
 import passportRoutes from "@/routes/passport.ts";
 import { verifyAccessToken } from "@/common/jwt.ts";
 import { REQUEST_AUTH_KEY } from "@ijia/account-dto";
@@ -9,19 +9,18 @@ beforeEach<Context>(async ({ hono }) => {
   passportRoutes.apply(hono);
 });
 
-test("没有登录不能刷新 token", async ({ hono }) => {
-  const response = await refreshToken(hono);
-  expect(response.status).toBe(401);
+test("没有登录不能刷新 token", async ({ api }) => {
+  await expect(refreshToken(api)).responseStatus(401);
 });
 
-test("登录后刷新 token 会重新写入鉴权 cookie", async ({ hono }) => {
+test("登录后刷新 token 会重新写入鉴权 cookie", async ({ api, publicDbPool }) => {
   const alice = await prepareUniqueUser("alice");
 
-  const response = await refreshToken(hono, alice.token);
-  expect(response.status).toBe(200);
+  const response = await refreshToken(api, alice.token);
+  await expect(response).responseStatus(200);
 
-  const setCookie = response.headers.get("set-cookie");
-  expect(setCookie).toContain(`${REQUEST_AUTH_KEY}=`);
+  const setCookie = response.headers.getSetCookie()
+  expect(setCookie[0]).toContain(`${REQUEST_AUTH_KEY}=`);
 
   const token = extractCookieValue(setCookie, REQUEST_AUTH_KEY);
   const nextToken = await verifyAccessToken(token);
@@ -29,23 +28,16 @@ test("登录后刷新 token 会重新写入鉴权 cookie", async ({ hono }) => {
   expect(nextToken.data.userId).toBe(alice.id);
 });
 
-async function refreshToken(hono: Context["hono"], token?: string) {
-  const headers = new Headers();
-  if (token) {
-    headers.set("cookie", `${REQUEST_AUTH_KEY}=${token}`);
-  }
-
-  return hono.fetch(
-    new Request("http://127.0.0.1/passport/refresh_token", {
-      method: "POST",
-      headers,
-    }),
-  );
+async function refreshToken(api: Context["api"], token?: string) {
+  return api["/passport/refresh_token"].fetch({
+    [JWT_TOKEN_KEY]: token,
+    method: "POST",
+  });
 }
 
-function extractCookieValue(setCookie: string | null, key: string) {
+function extractCookieValue(setCookie: string[] | null, key: string) {
   expect(setCookie).toBeTruthy();
-  const match = setCookie?.match(new RegExp(`${key}=([^;]+)`));
+  const match = setCookie?.[0].match(new RegExp(`${key}=([^;]+)`));
   expect(match?.[1]).toBeTruthy();
   return match![1];
 }
