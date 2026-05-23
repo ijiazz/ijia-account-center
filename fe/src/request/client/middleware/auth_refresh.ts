@@ -16,5 +16,5 @@ export async function authRefresh(ctx: HoContext, next: () => Promise<HoResponse
   return res;
 }
 async function refreshToken() {
-  await fetch("/passport/refresh_token", { method: "POST", credentials: "include" });
+  await fetch("/api/passport/refresh_token", { method: "POST", credentials: "include" });
 }
