@@ -19,7 +19,7 @@ test("登录后刷新 token 会重新写入鉴权 cookie", async ({ api, publicD
   const response = await refreshToken(api, alice.token);
   await expect(response).responseStatus(200);
 
-  const setCookie = response.headers.getSetCookie()
+  const setCookie = response.headers.getSetCookie();
   expect(setCookie[0]).toContain(`${REQUEST_AUTH_KEY}=`);
 
   const token = extractCookieValue(setCookie, REQUEST_AUTH_KEY);
