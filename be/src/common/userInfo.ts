@@ -18,11 +18,11 @@ export class UserInfo extends HttpUserInfo {
   constructor(accessToken?: string) {
     const jwtAuth = new JWTAuth({ accessToken, verifyAccessToken, createError });
     super(jwtAuth, { createError, rootRoleId: Role.Root });
-    this.#jwwtAuth = jwtAuth;
+    this.#jwtAuth = jwtAuth;
   }
-  #jwwtAuth: JWTAuth<AccessUserData>;
+  #jwtAuth: JWTAuth<AccessUserData>;
   override checkUpdateToken(force = false) {
-    return this.#jwwtAuth.checkUpdateToken(force);
+    return this.#jwtAuth.checkUpdateToken(force);
   }
 }
 export function createUserInfo(accessToken?: string): UserInfo {
