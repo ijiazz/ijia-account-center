@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { css, cx } from "@emotion/css";
 import { useWindowResize } from "@/lib/hook/window.ts";
+import { useDocumentTitle } from "../../hooks/document_title.ts";
 import { LoginForm } from "./-components/LoginForm.tsx";
 
 export const Route = createFileRoute("/_video_background/login")({
@@ -12,6 +13,7 @@ export const Route = createFileRoute("/_video_background/login")({
 
 export function RouteComponent() {
   const windowSize = useWindowResize();
+  useDocumentTitle("登录 - IJIA学院");
 
   const isCenter = windowSize ? windowSize.height * 1.2 > windowSize.width : false;
   return (
