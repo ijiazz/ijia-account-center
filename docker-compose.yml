@@ -38,16 +38,3 @@ services:
       - ijiadb
     ports:
       - "9003:3000"
-
-  account-center-fe:
-    image: ijia/account-center-fe
-    container_name: ijia-account-center-fe
-    build:
-      context: .
-      dockerfile: ./build/dockerfile.fe
-    depends_on:
-      account-center-be:
-        condition: service_started
-    ports:
-      - "9001:443"
-      - "9002:80"

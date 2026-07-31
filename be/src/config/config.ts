@@ -22,7 +22,7 @@ class Watcher {
     this.watch(this.abc.signal).catch(() => {});
   }
   private async watch(signal: AbortSignal) {
-    let timer: number | undefined;
+    let timer: NodeJS.Timeout | undefined;
     for await (const info of fs.watch(configFilePath, { signal: signal })) {
       if (info.eventType === "change") {
         if (timer !== undefined) continue;
