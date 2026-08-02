@@ -9,3 +9,8 @@ export const SIGNUP_REDIRECT_URL: string = `${IJIA_ORIGIN}/profile/center`;
 export const API_HOST: URL = IS_ONLINE_HOSTNAME
   ? new URL("https://ijiazz.cn/api")
   : new URL("/api", globalThis.location.origin);
+
+export function getCaptchaURL(path: string) {
+  if (API_HOST.pathname === "/") return API_HOST.origin + path;
+  return API_HOST.href + path;
+}

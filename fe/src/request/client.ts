@@ -29,7 +29,7 @@ type API = {
 
 export const http = new HoFetch({ fetch: (url, option) => fetch(url, { ...option, credentials: "include" }) });
 export const api: API = createFetchSuite<ApiDefined>(http, {
-  basePath: API_HOST.pathname,
+  basePath: API_HOST.pathname === "/" ? "" : API_HOST.pathname,
   origin: API_HOST.origin,
 });
 http.use(authRefresh);

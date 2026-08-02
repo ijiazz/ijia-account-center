@@ -3,7 +3,7 @@ import { Button, Modal, Popover, Spin } from "antd";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { api } from "@/request/client.ts";
 import { useMutation } from "@tanstack/react-query";
-import { API_HOST } from "@/common/host.ts";
+import { getCaptchaURL } from "@/common/host.ts";
 
 function useImageCaptcha(config: { onSubmit?: (sessionId: string, selected: number[]) => void | Promise<void> }) {
   const {
@@ -16,7 +16,7 @@ function useImageCaptcha(config: { onSubmit?: (sessionId: string, selected: numb
     mutationFn: async (sessionId?: string) => {
       return api["/captcha/image"]
         .post({ params: { sessionId } })
-        .then((res) => ({ ...res, imageUrlList: res.imageUrlList.map((item) => API_HOST.href + item) }));
+        .then((res) => ({ ...res, imageUrlList: res.imageUrlList.map((item) => getCaptchaURL(item)) }));
     },
   });
   const {
