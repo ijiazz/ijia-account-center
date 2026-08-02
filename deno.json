@@ -1,7 +1,9 @@
 {
   "tasks": {
     "fmt": "deno fmt",
-    "check:fmt": "deno fmt --check"
+    "check:fmt": "deno fmt --check",
+    "setup": "deno run -ER --allow-run --allow-sys script/install.ts",
+    "check:type": "deno run -ER --allow-run --allow-sys script/check-type.ts"
   },
   "fmt": {
     "lineWidth": 120

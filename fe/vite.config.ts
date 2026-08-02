@@ -4,7 +4,7 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import legacy from "@vitejs/plugin-legacy";
 import deno from "@deno/vite-plugin";
 
-const origin = "http://localhost:3000";
+const API_ORIGIN = process.env.API_ORIGIN || "http://localhost:3000";
 const buildTime = Date.now();
 
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/": {
-        target: origin,
+        target: API_ORIGIN,
         secure: false,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),

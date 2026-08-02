@@ -4,15 +4,23 @@
     "check:fmt": "deno fmt --check",
     "fmt": "deno fmt",
     "e2e:local": "deno x playwright test --ui",
-    "e2e:run": "deno x playwright test -c playwright.config.ts"
+    "e2e:run": "deno x playwright test -c playwright.config.ts",
+    "ci:install-browser": "deno x playwright install chromium --with-deps",
+    "install-all": "deno x playwright install chromium webkit firefox --with-deps"
   },
   "fmt": {
     "lineWidth": 120
   },
   "nodeModulesDir": "manual",
   "imports": {
-    "@ijia/account-dto": "jsr:@ijia/account-dto@^0.0.0",
+    "@asla/hofetch": "jsr:@asla/hofetch@^0.0.2",
+    "@asla/pg": "jsr:@asla/pg@^0.2.4",
+    "@asla/yoursql": "jsr:@asla/yoursql@^0.13.1",
+    "@ijia/school-db": "jsr:@ijia/school-db@^0.0.4",
+    "@playwright/test": "npm:@playwright/test@^1.55.0",
+
     "@/": "./"
   },
+  "jsrDepsInNodeModules": true,
   "links": ["../dto"]
 }

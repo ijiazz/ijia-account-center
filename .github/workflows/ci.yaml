@@ -10,35 +10,17 @@ jobs:
       - uses: actions/checkout@v6
       - uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.7.x
+          deno-version: v2
           cache: true
       - name: check format
         run: deno task check:fmt
 
-      - name: check dto
-        if: ${{ always() }}
-        run: |
-          deno install --frozen
-          deno task check:type
-        working-directory: ./dto
-      - name: check fe
-        if: ${{ always() }}
-        run: |
-          deno install --frozen
-          deno task check:type
-        working-directory: ./fe
-      - name: check be
-        if: ${{ always() }}
-        run: |
-          deno install --frozen
-          deno task check:type
-        working-directory: ./be
-      - name: check e2e
-        if: ${{ always() }}
-        run: |
-          deno install --frozen
-          deno task check:type
-        working-directory: ./e2e
+      - name: setup
+        run: deno task setup
+
+      - name: check type
+        run: deno task check:type
+
   test-api:
     runs-on: ubuntu-latest
     env:
@@ -66,7 +48,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.7.x
+          deno-version: v2
           cache: true
       - name: install
         run: deno install --frozen

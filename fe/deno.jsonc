@@ -4,6 +4,7 @@
     "check:type": "deno check",
     "check:fmt": "deno fmt --check",
     "fmt": "deno fmt",
+    "preview": "deno x vite preview",
     "check:lint": "deno lint",
     "build": "deno x vite build"
   },

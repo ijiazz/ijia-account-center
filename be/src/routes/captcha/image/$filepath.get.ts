@@ -12,8 +12,9 @@ export default routeGroup.create({
     return filepath;
   },
   async handler(imageUri: string, ctx): Promise<Response> {
-    const { mime, stream } = await imageCaptchaService.getCaptchaImageStream(imageUri);
+    const { mime, stream, stat } = await imageCaptchaService.getCaptchaImageStream(imageUri);
     ctx.header("Content-Type", mime);
+    ctx.header("Content-Length", stat.size.toString());
     return ctx.body(stream, 200);
   },
 });
