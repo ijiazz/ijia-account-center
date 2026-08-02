@@ -42,7 +42,7 @@ jobs:
         working-directory: ./e2e
       - name: Build Web
         run: deno task build
-        working-directory: ./web
+        working-directory: ./fe
 
       - uses: actions/download-artifact@v4
         with:
@@ -62,9 +62,9 @@ jobs:
         run: deno task ci:install-browser
         working-directory: ./e2e
       - name: Run web server
-        run:  nohup deno task preview > /dev/null 2>&1 &
+        run: nohup deno task preview > /dev/null 2>&1 &
         working-directory: ./fe
-        
+
       - name: E2E test
         run: deno task e2e:run
         env:
