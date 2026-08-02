@@ -2,7 +2,7 @@ import { defineConfig } from "@playwright/test";
 import process from "node:process";
 import path from "node:path";
 
-const USE_PREVIEW = false;
+const USE_PREVIEW = !!process.env.CI;
 
 export const env = {
   WEB_URL: process.env.WEB_URL || "http://localhost:5173",
