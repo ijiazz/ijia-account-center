@@ -37,4 +37,4 @@ services:
       - redis
       - ijiadb
     ports:
-      - "9003:3000"
+      - "3000:3000"

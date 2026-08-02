@@ -70,7 +70,6 @@ jobs:
         env:
           DATABASE_URL: "postgresql://postgres@localhost:5442/ijia"
           WEB_URL: "http://localhost:4173"
-          API_ORIGIN: "http://localhost:9003"
         working-directory: ./e2e
 
       - uses: actions/upload-artifact@v7
